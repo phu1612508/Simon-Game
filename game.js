@@ -14,12 +14,18 @@ $(document).keypress(function(key){
 function checkAnswer(currentLevel){
   if (gamePattern[currentLevel]==userClickedPattern[currentLevel]) {
     console.log("correct");
-    if (gamePattern.length=userClickedPattern.length) {
+    if (gamePattern.length==userClickedPattern.length) {
       setTimeout(function(){
         nextSequence();
       },1000);
     }
   } else {
+    playMusic("wrong");
+    $("body").addClass("game-over");
+    setTimeout(function(){
+      $("body").removeClass("game-over");
+    },200);
+      $("#level-title").html("Game Over, Press A Key to Restart");
     console.log("wrong");
   }
 
