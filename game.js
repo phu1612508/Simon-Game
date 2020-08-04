@@ -21,6 +21,13 @@ function playMusic(color){
 $(".btn").click(function(){
   var userChosenColour=this.id;
   userClickedPattern.push(userChosenColour);
-  console.log(userClickedPattern);
   playMusic(userChosenColour);
+  animatePress(userChosenColour);
 });
+
+function animatePress(currentColour){
+  $("#"+currentColour).addClass("pressed");
+  setTimeout(function(){
+    $("#"+currentColour).removeClass("pressed");
+  },100);
+}
