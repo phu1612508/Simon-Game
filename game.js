@@ -22,4 +22,5 @@ $(".btn").click(function(){
   var userChosenColour=this.id;
   userClickedPattern.push(userChosenColour);
   console.log(userClickedPattern);
+  playMusic(userChosenColour);
 });
