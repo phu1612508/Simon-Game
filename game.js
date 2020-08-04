@@ -5,22 +5,36 @@ var started=false;
 var level=0;
 $(document).keypress(function(key){
   if(!started &&key.key=="a"){
-    $("h1").html("Level "+ level);
+    $("#level-title").html("Level "+ level);
     nextSequence();
     started=true;
   }
 });
 
+function checkAnswer(currentLevel){
+  if (gamePattern[currentLevel]==userClickedPattern[currentLevel]) {
+    console.log("correct");
+    if (gamePattern.length=userClickedPattern.length) {
+      setTimeout(function(){
+        nextSequence();
+      },1000);
+    }
+  } else {
+    console.log("wrong");
+  }
 
+}
 
 function nextSequence(){
+  userClickedPattern = [];
   level+=1;
-  $("h1").html("Level "+ level);
+  $("#level-title").html("Level "+ level);
   var randomNumber=Math.floor(Math.random()*4);
   var randomChosenColour=buttonColours[randomNumber];
   gamePattern.push(randomChosenColour);
   flash(randomChosenColour);
   playMusic(randomChosenColour);
+
 }
 
 function flash(color){
@@ -32,12 +46,12 @@ function playMusic(color){
   audio.play();
 }
 
-$(document).keypress()
 $(".btn").click(function(){
   var userChosenColour=this.id;
   userClickedPattern.push(userChosenColour);
   playMusic(userChosenColour);
   animatePress(userChosenColour);
+  checkAnswer(userClickedPattern.length);
 });
 
 function animatePress(currentColour){
